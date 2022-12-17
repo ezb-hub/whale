@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(
+import 'package:ezb/src/AppBar.dart';
+
+void main() => runApp(const MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          leading: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
+        appBar: MainAppBar(
           title: Text(
-            'Corsair',
+            'EZB',
             style: TextStyle(color: Colors.black),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.black,
-              ),
-            ),
-          ],
-          backgroundColor: Colors.white,
         ),
         body: Center(
-          child: Text('lorem ipsum dolor sit amet, consectetur adip '),
+          child: Text('Lorem ipsum dolor sit amet, consectetur'),
         ),
       ),
     ));
