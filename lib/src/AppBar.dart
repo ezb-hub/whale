@@ -20,7 +20,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       actions: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: GestureDetector(
             onTap: () => print('test'),
             child: const Icon(
