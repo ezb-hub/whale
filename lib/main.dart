@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:ezb/src/AppBar.dart';
+import 'package:ezb/src/screens/Home.dart';
 
 void main() => runApp(const MaterialApp(
-      home: Scaffold(
-        appBar: MainAppBar(
-          title: Text(
-            'EZB',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        body: Center(
-          child: Text('Lorem ipsum dolor sit amet, consectetur'),
-        ),
-      ),
+      home: HomeScreen(),
     ));
