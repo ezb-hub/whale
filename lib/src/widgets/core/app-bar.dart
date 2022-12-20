@@ -12,7 +12,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: GestureDetector(
-          onTap: () => print('asdf'),
+          onTap: () => Scaffold.of(context).openDrawer(),
           child: const Icon(
             Icons.menu,
             color: Colors.black,

@@ -15,21 +15,20 @@ class ImageSliderDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          child: CarouselSlider(
-        options: CarouselOptions(
-          viewportFraction: 1,
-          autoPlay: false,
-        ),
-        items: imgList
-            .map((item) => Container(
-                  child: Center(
-                      child:
-                          Image.network(item, fit: BoxFit.cover, width: 1000)),
-                ))
-            .toList(),
-      )),
-    );
+    return Container(
+        padding: const EdgeInsets.all(0),
+        child: CarouselSlider(
+          options: CarouselOptions(
+            viewportFraction: 1,
+            autoPlay: false,
+          ),
+          items: imgList
+              .map((item) => Container(
+                    child: Center(
+                        child: Image.network(item,
+                            fit: BoxFit.cover, width: 1000)),
+                  ))
+              .toList(),
+        ));
   }
 }
