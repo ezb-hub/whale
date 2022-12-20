@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ezb">
    <application
-        android:label="ezb"
+        android:label="EZB"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
