@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'package:ezb/src/screens/Home.dart';
+import 'package:ezb/src/routes.dart';
 
-void main() => runApp(const MaterialApp(
-      home: HomeScreen(),
-    ));
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(const Routes());
+  FlutterNativeSplash.remove();
+}

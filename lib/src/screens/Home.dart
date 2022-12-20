@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ezb/src/components/Carousel.dart';
+import 'package:ezb/src/widgets/home/carousel.dart';
 
-import 'package:ezb/src/AppBar.dart';
+import 'package:ezb/src/widgets/core/app-bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
