@@ -11,6 +11,10 @@ class Routes extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'EZB',
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+        primaryColor: const Color(0xFF47b3e2),
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),

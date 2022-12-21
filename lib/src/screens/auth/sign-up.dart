@@ -7,10 +7,11 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: const Text(
           'Sign Up',
           style: TextStyle(color: Colors.black),
