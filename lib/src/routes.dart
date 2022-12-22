@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:ezb/src/screens/home.dart';
-import 'package:ezb/src/screens/auth/sign-in.dart';
-import 'package:ezb/src/screens/auth/sign-up.dart';
+
+import 'package:ezb/src/screens/entry/sign-in.dart';
+import 'package:ezb/src/screens/entry/sign-up.dart';
 
 class Routes extends StatelessWidget {
   const Routes({super.key});

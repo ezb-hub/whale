@@ -32,14 +32,24 @@ class SignInScreenState extends State<SignInScreen> {
               children: <Widget>[
                 Container(
                   padding: const EdgeInsets.all(0),
-                  child: const Text('SIGN IN',
+                  child: const Text('Welcome Back',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 40,
+                          fontSize: 34,
                           fontWeight: FontWeight.w500)),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.all(0),
+                  child: const Text('Login to your account',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500)),
+                ),
+                const SizedBox(height: 48),
                 TextFormField(
                   enableSuggestions: false,
                   validator: (value) {
@@ -110,15 +120,47 @@ class SignInScreenState extends State<SignInScreen> {
                   onSaved: (val) => setState(() => password = val.toString()),
                 ),
                 const SizedBox(height: 16),
-                CheckboxListTile(
-                    activeColor: Theme.of(context).primaryColor,
-                    contentPadding: const EdgeInsets.all(0),
-                    title: const Text("Remember Me"),
-                    value: rememberMe,
-                    controlAffinity: ListTileControlAffinity.leading,
-                    onChanged: (val) {
-                      setState(() => rememberMe = val!);
-                    }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
+                        onPressed: () =>
+                            setState(() => rememberMe = !rememberMe),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                  height: 0,
+                                  width: 0,
+                                  child: Checkbox(
+                                      activeColor:
+                                          Theme.of(context).primaryColor,
+                                      value: rememberMe,
+                                      onChanged: (value) {
+                                        setState(() => rememberMe = value!);
+                                      })),
+                              const SizedBox(width: 20.0),
+                              const Text(
+                                "Remember Me",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ])),
+                    TextButton(
+                      style: ButtonStyle(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                      ),
+                      onPressed: () {},
+                      child: Text('Forgot Password?',
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor)),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 16),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
@@ -139,6 +181,7 @@ class SignInScreenState extends State<SignInScreen> {
                             form.save();
                             print(username);
                             print(password);
+                            print(rememberMe);
                           }
                         },
                         child: const Text(
