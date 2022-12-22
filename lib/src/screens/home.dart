@@ -4,6 +4,7 @@ import 'package:ezb/src/widgets/core/app-bar.dart';
 import 'package:ezb/src/widgets/core/sidebar.dart';
 
 import 'package:ezb/src/widgets/home/carousel.dart';
+import 'package:ezb/src/widgets/home/product-carousel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,8 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: const <Widget>[
-            ImageSliderDemo(),
+            MainImageSlider(),
+            ProductSlider(),
           ],
         ),
       ),
