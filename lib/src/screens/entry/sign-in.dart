@@ -14,10 +14,6 @@ class SignInScreenState extends State<SignInScreen> {
   String password = '';
   bool rememberMe = false;
 
-  Color getColor(Set<MaterialState> states) {
-    return Theme.of(context).primaryColor;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +150,8 @@ class SignInScreenState extends State<SignInScreen> {
                         overlayColor:
                             MaterialStateProperty.all(Colors.transparent),
                       ),
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/forgot-password'),
                       child: Text('Forgot Password?',
                           style:
                               TextStyle(color: Theme.of(context).primaryColor)),

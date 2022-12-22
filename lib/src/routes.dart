@@ -4,6 +4,7 @@ import 'package:ezb/src/screens/home.dart';
 
 import 'package:ezb/src/screens/entry/sign-in.dart';
 import 'package:ezb/src/screens/entry/sign-up.dart';
+import 'package:ezb/src/screens/entry/forgot-password.dart';
 
 class Routes extends StatelessWidget {
   const Routes({super.key});
@@ -21,6 +22,7 @@ class Routes extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/sign-in': (context) => const SignInScreen(),
         '/sign-up': (context) => const SignUpScreen(),
+        '/forgot-password': (context) => const ForgotPasswordScreen(),
       },
     );
   }
