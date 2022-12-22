@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: const <Widget>[
             MainImageSlider(),
+            SizedBox(height: 16),
             ProductSlider(),
           ],
         ),

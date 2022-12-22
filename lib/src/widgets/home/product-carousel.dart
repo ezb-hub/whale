@@ -1,13 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+class Product {
+  String image = '';
+  String title = '';
+
+  Product({
+    required this.image,
+    required this.title,
+  });
+}
+
+final List<Product> imgList = [
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-cases.png',
+      title: 'Cases'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-keyboards.png',
+      title: 'Keyboard'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-headsets.png',
+      title: 'Headsets'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-laptops.png',
+      title: 'Gaming Laptops'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/content/images/header/explore-monitors.png',
+      title: 'Monitors'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-gaming-pcs.png',
+      title: 'Gaming PCs'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-cameras.png',
+      title: 'Cameras'),
+  Product(
+      image: 'https://cwsmgmt.corsair.com/landing/home/images/explore-mice.png',
+      title: 'Mice'),
+  Product(
+      image: 'https://cwsmgmt.corsair.com/landing/home/images/explore-psu.png',
+      title: 'Power Supplies'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-cpu-coolers.png',
+      title: 'CPU Coolers'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-custom-cooling.png',
+      title: 'Custom Cooling'),
+  Product(
+      image: 'https://cwsmgmt.corsair.com/landing/home/images/explore-fans.png',
+      title: 'Fans'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-gaming-chairs.png',
+      title: 'Gaming Chairs'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-memory.png',
+      title: 'Memory'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-storage.png',
+      title: 'Storage'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-mousepads.png',
+      title: 'Mouse Pads'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-ambient-lighting.png',
+      title: 'Ambient Lighting'),
+  Product(
+      image:
+          'https://cwsmgmt.corsair.com/landing/home/images/explore-thunderbolt-docks.png',
+      title: 'Thunderbolt Docks'),
 ];
 
 class ProductSlider extends StatefulWidget {
@@ -26,12 +99,18 @@ class ProductSliderState extends State<ProductSlider> {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: <Widget>[
-            const Text('Explore Product', style: TextStyle(fontSize: 40)),
+            const Text('Explore Product',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w500)),
+            const SizedBox(height: 16),
             CarouselSlider.builder(
               options: CarouselOptions(
                 enableInfiniteScroll: false,
                 viewportFraction: 1,
-                height: 150,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 10),
               ),
               itemCount: imageCount,
               itemBuilder: (context, index, _) {
@@ -39,6 +118,7 @@ class ProductSliderState extends State<ProductSlider> {
                 final int? second =
                     index * 2 < imgList.length - 1 ? first + 1 : null;
                 return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [first, second].map((idx) {
                     return Expanded(
                       flex: 1,
@@ -47,10 +127,12 @@ class ProductSliderState extends State<ProductSlider> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: idx != null
-                              ? Image.network(
-                                  imgList[idx],
-                                  fit: BoxFit.cover,
-                                )
+                              ? Container(
+                                  color: Colors.white,
+                                  child: Image.network(
+                                    imgList[idx].image,
+                                    fit: BoxFit.cover,
+                                  ))
                               : const SizedBox.shrink(),
                         ),
                       ),
