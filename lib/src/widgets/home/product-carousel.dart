@@ -24,34 +24,42 @@ class ProductSliderState extends State<ProductSlider> {
 
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: CarouselSlider.builder(
-          options: CarouselOptions(
-            aspectRatio: 2.0,
-            enlargeCenterPage: false,
-            viewportFraction: 1,
-          ),
-          itemCount: imageCount,
-          itemBuilder: (context, index, _) {
-            final int first = index * 2;
-            final int? second =
-                index * 2 < imgList.length - 1 ? first + 1 : null;
-            return Row(
-              children: [first, second].map((idx) {
-                return Expanded(
-                  flex: 1,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: idx != null
-                          ? Image.network(imgList[idx], fit: BoxFit.cover)
-                          : const SizedBox.shrink(),
-                    ),
-                  ),
+        child: Column(
+          children: <Widget>[
+            const Text('Explore Product', style: TextStyle(fontSize: 40)),
+            CarouselSlider.builder(
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                viewportFraction: 1,
+                height: 150,
+              ),
+              itemCount: imageCount,
+              itemBuilder: (context, index, _) {
+                final int first = index * 2;
+                final int? second =
+                    index * 2 < imgList.length - 1 ? first + 1 : null;
+                return Row(
+                  children: [first, second].map((idx) {
+                    return Expanded(
+                      flex: 1,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: idx != null
+                              ? Image.network(
+                                  imgList[idx],
+                                  fit: BoxFit.cover,
+                                )
+                              : const SizedBox.shrink(),
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 );
-              }).toList(),
-            );
-          },
+              },
+            ),
+          ],
         ));
   }
 }
