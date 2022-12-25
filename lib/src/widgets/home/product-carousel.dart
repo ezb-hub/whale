@@ -96,7 +96,7 @@ class ProductSliderState extends State<ProductSlider> {
     int imageCount = (imgList.length / 2).round();
 
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Column(
           children: <Widget>[
             const Text('Explore Product',
@@ -110,7 +110,7 @@ class ProductSliderState extends State<ProductSlider> {
                 enableInfiniteScroll: false,
                 viewportFraction: 1,
                 autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 10),
+                autoPlayInterval: const Duration(seconds: 15),
               ),
               itemCount: imageCount,
               itemBuilder: (context, index, _) {
@@ -118,23 +118,43 @@ class ProductSliderState extends State<ProductSlider> {
                 final int? second =
                     index * 2 < imgList.length - 1 ? first + 1 : null;
                 return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [first, second].map((idx) {
                     return Expanded(
                       flex: 1,
                       child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 8),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: idx != null
-                              ? Container(
-                                  color: Colors.white,
-                                  child: Image.network(
-                                    imgList[idx].image,
-                                    fit: BoxFit.cover,
-                                  ))
-                              : const SizedBox.shrink(),
-                        ),
+                        child: idx != null
+                            ? Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    Container(
+                                      color: Colors.black.withOpacity(0.05),
+                                      child: Image.network(
+                                        imgList[idx].image,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Container(
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8),
+                                      child: Text(imgList[idx].title,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ),
+                                  ],
+                                ))
+                            : const SizedBox.shrink(),
                       ),
                     );
                   }).toList(),
