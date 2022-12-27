@@ -25,7 +25,9 @@ class TextFloatImageWidgetState extends State<TextFloatImageWidget> {
             borderRadius: BorderRadius.circular(4),
             child: Stack(
               children: [
-                Image.network(widget.image),
+                Image.network(
+                  widget.image,
+                ),
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.topLeft,
@@ -39,10 +41,12 @@ class TextFloatImageWidgetState extends State<TextFloatImageWidget> {
                                 color: Colors.white,
                                 fontSize: 24,
                               )),
+                          const SizedBox(height: 8),
                           Text(widget.subtitle,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
+                                height: 1.3,
                               ))
                         ],
                       ),

@@ -16,6 +16,7 @@ class Routes extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
         primaryColor: const Color(0xFF47b3e2),
+        scaffoldBackgroundColor: Colors.white,
       ),
       initialRoute: '/',
       routes: {

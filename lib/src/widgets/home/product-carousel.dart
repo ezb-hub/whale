@@ -125,6 +125,7 @@ class ProductSliderState extends State<ProductSlider> {
                         margin: const EdgeInsets.symmetric(horizontal: 8),
                         child: idx != null
                             ? Card(
+                                elevation: 1.5,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4),
                                 ),

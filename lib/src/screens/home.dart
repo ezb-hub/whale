@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ezb/src/widgets/core/app-bar.dart';
 import 'package:ezb/src/widgets/core/sidebar.dart';
 import 'package:ezb/src/widgets/core/text-float-image.dart';
+import 'package:ezb/src/widgets/core/item-list.dart';
 
 import 'package:ezb/src/widgets/home/carousel.dart';
 import 'package:ezb/src/widgets/home/product-carousel.dart';
@@ -25,7 +26,8 @@ class HomeTab extends StatelessWidget {
           subtitle:
               'Transforms your CORSAIR ELITE CAPELLIX CPU cooler into a personalized dashboard.',
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 32),
+        ItemListWidget(),
       ],
     );
   }
