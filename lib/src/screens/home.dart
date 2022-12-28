@@ -14,9 +14,9 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String getHomeProduct = """
-      query GET_HOME_PRODUCT {
-        homeProducts {
+    String getCategories = """
+      query GET_CATEGORIES {
+        categories {
           data {
             id,
             attributes {
@@ -36,7 +36,7 @@ class HomeTab extends StatelessWidget {
 
     return Query(
       options: QueryOptions(
-        document: gql(getHomeProduct),
+        document: gql(getCategories),
       ),
       builder: (QueryResult result,
           {VoidCallback? refetch, FetchMore? fetchMore}) {
@@ -48,7 +48,7 @@ class HomeTab extends StatelessWidget {
           return const Text('Loading');
         }
 
-        List? products = result.data?['homeProducts']?['data'];
+        List? products = result.data?['categories']?['data'];
 
         return ListView(
           children: <Widget>[
