@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'package:ezb/src/widgets/core/app-bar.dart';
 import 'package:ezb/src/widgets/core/sidebar.dart';
@@ -13,22 +14,61 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const <Widget>[
-        MainImageSlider(),
-        SizedBox(height: 16),
-        ProductSlider(),
-        SizedBox(height: 12),
-        TextFloatImageWidget(
-          image:
-              'https://cwsmgmt.corsair.com/pdp/cooling/elite-lcd/assets/images/scarif-wide-compatibility-bg.jpg',
-          title: 'ELITE LCD UPGRADE KIT',
-          subtitle:
-              'Transforms your CORSAIR ELITE CAPELLIX CPU cooler into a personalized dashboard.',
-        ),
-        SizedBox(height: 32),
-        ItemListWidget(),
-      ],
+    String getHomeProduct = """
+      query GET_HOME_PRODUCT {
+        homeProducts {
+          data {
+            id,
+            attributes {
+              title,
+              media {
+                data {
+                  attributes {
+                    formats
+                  }
+                }
+              },
+            },
+          }
+        }
+      }
+    """;
+
+    return Query(
+      options: QueryOptions(
+        document: gql(getHomeProduct),
+      ),
+      builder: (QueryResult result,
+          {VoidCallback? refetch, FetchMore? fetchMore}) {
+        if (result.hasException) {
+          return Text(result.exception.toString());
+        }
+
+        if (result.isLoading) {
+          return const Text('Loading');
+        }
+
+        List? products = result.data?['homeProducts']?['data'];
+
+        return ListView(
+          children: <Widget>[
+            const MainImageSlider(),
+            const SizedBox(height: 16),
+            if (products != null)
+              ProductSlider(title: 'Explore Product', data: products),
+            const SizedBox(height: 12),
+            const TextFloatImageWidget(
+              image:
+                  'https://cwsmgmt.corsair.com/pdp/cooling/elite-lcd/assets/images/scarif-wide-compatibility-bg.jpg',
+              title: 'ELITE LCD UPGRADE KIT',
+              subtitle:
+                  'Transforms your CORSAIR ELITE CAPELLIX CPU cooler into a personalized dashboard.',
+            ),
+            const SizedBox(height: 32),
+            const ItemListWidget(),
+          ],
+        );
+      },
     );
   }
 }

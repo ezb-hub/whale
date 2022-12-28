@@ -1,90 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class Product {
-  String image = '';
-  String title = '';
-
-  Product({
-    required this.image,
-    required this.title,
-  });
-}
-
-final List<Product> imgList = [
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-cases.png',
-      title: 'Cases'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-keyboards.png',
-      title: 'Keyboard'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-headsets.png',
-      title: 'Headsets'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-laptops.png',
-      title: 'Gaming Laptops'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/content/images/header/explore-monitors.png',
-      title: 'Monitors'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-gaming-pcs.png',
-      title: 'Gaming PCs'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-cameras.png',
-      title: 'Cameras'),
-  Product(
-      image: 'https://cwsmgmt.corsair.com/landing/home/images/explore-mice.png',
-      title: 'Mice'),
-  Product(
-      image: 'https://cwsmgmt.corsair.com/landing/home/images/explore-psu.png',
-      title: 'Power Supplies'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-cpu-coolers.png',
-      title: 'CPU Coolers'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-custom-cooling.png',
-      title: 'Custom Cooling'),
-  Product(
-      image: 'https://cwsmgmt.corsair.com/landing/home/images/explore-fans.png',
-      title: 'Fans'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-gaming-chairs.png',
-      title: 'Gaming Chairs'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-memory.png',
-      title: 'Memory'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-storage.png',
-      title: 'Storage'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-mousepads.png',
-      title: 'Mouse Pads'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-ambient-lighting.png',
-      title: 'Ambient Lighting'),
-  Product(
-      image:
-          'https://cwsmgmt.corsair.com/landing/home/images/explore-thunderbolt-docks.png',
-      title: 'Thunderbolt Docks'),
-];
-
 class ProductSlider extends StatefulWidget {
-  const ProductSlider({super.key});
+  const ProductSlider({
+    super.key,
+    required this.title,
+    required this.data,
+  });
+
+  final String title;
+  final List<dynamic> data;
 
   @override
   State<ProductSlider> createState() => ProductSliderState();
@@ -93,14 +18,14 @@ class ProductSlider extends StatefulWidget {
 class ProductSliderState extends State<ProductSlider> {
   @override
   Widget build(BuildContext context) {
-    int imageCount = (imgList.length / 2).round();
+    int imageCount = (widget.data.length / 2).round();
 
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Column(
           children: <Widget>[
-            const Text('Explore Product',
-                style: TextStyle(
+            Text(widget.title,
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 28,
                     fontWeight: FontWeight.w500)),
@@ -116,7 +41,7 @@ class ProductSliderState extends State<ProductSlider> {
               itemBuilder: (context, index, _) {
                 final int first = index * 2;
                 final int? second =
-                    index * 2 < imgList.length - 1 ? first + 1 : null;
+                    index * 2 < widget.data.length - 1 ? first + 1 : null;
                 return Row(
                   children: [first, second].map((idx) {
                     return Expanded(
@@ -138,7 +63,10 @@ class ProductSliderState extends State<ProductSlider> {
                                     Container(
                                       color: Colors.black.withOpacity(0.05),
                                       child: Image.network(
-                                        imgList[idx].image,
+                                        widget.data[idx]?['attributes']
+                                                    ?['media']?['data']
+                                                ?['attributes']?['formats']
+                                            ?['thumbnail']?['url'],
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -146,7 +74,9 @@ class ProductSliderState extends State<ProductSlider> {
                                       color: Colors.white,
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8),
-                                      child: Text(imgList[idx].title,
+                                      child: Text(
+                                          widget.data[idx]?['attributes']
+                                              ?['title'],
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                               color: Colors.black,

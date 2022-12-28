@@ -24,7 +24,7 @@ class TextFloatImageWidgetState extends State<TextFloatImageWidget> {
         child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Stack(
-              children: [
+              children: <Widget>[
                 Image.network(
                   widget.image,
                 ),
