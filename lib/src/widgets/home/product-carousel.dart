@@ -1,98 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-class ProductSlider extends StatefulWidget {
-  const ProductSlider({
-    super.key,
-    required this.title,
-    required this.data,
-  });
+import 'package:ezb/src/widgets/core/product-carousel.dart';
 
-  final String title;
-  final List<dynamic> data;
+class ItemSlider extends StatefulWidget {
+  const ItemSlider({super.key});
 
   @override
-  State<ProductSlider> createState() => ProductSliderState();
+  State<ItemSlider> createState() => ItemSliderState();
 }
 
-class ProductSliderState extends State<ProductSlider> {
+class ItemSliderState extends State<ItemSlider> {
   @override
   Widget build(BuildContext context) {
-    int imageCount = (widget.data.length / 2).round();
-
-    return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: Column(
-          children: <Widget>[
-            Text(widget.title,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w500)),
-            const SizedBox(height: 16),
-            CarouselSlider.builder(
-              options: CarouselOptions(
-                enableInfiniteScroll: false,
-                viewportFraction: 1,
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 15),
-              ),
-              itemCount: imageCount,
-              itemBuilder: (context, index, _) {
-                final int first = index * 2;
-                final int? second =
-                    index * 2 < widget.data.length - 1 ? first + 1 : null;
-                return Row(
-                  children: [first, second].map((idx) {
-                    return Expanded(
-                      flex: 1,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                        child: idx != null
-                            ? Card(
-                                elevation: 1.5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                clipBehavior: Clip.antiAlias,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Container(
-                                      color: Colors.black.withOpacity(0.05),
-                                      child: Image.network(
-                                        widget.data[idx]?['attributes']
-                                                    ?['media']?['data']
-                                                ?['attributes']?['formats']
-                                            ?['thumbnail']?['url'],
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Container(
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8),
-                                      child: Text(
-                                          widget.data[idx]?['attributes']
-                                              ?['title'],
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500)),
-                                    ),
-                                  ],
-                                ))
-                            : const SizedBox.shrink(),
-                      ),
-                    );
-                  }).toList(),
-                );
+    String getCategories = """
+      query GET_CATEGORIES {
+        categories {
+          data {
+            id,
+            attributes {
+              title,
+              media {
+                data {
+                  attributes {
+                    formats
+                  }
+                }
               },
-            ),
-          ],
-        ));
+            },
+          }
+        }
+      }
+    """;
+
+    return Query(
+      options: QueryOptions(
+        document: gql(getCategories),
+      ),
+      builder: (QueryResult result,
+          {VoidCallback? refetch, FetchMore? fetchMore}) {
+        if (result.hasException) {
+          return Text(result.exception.toString());
+        }
+
+        if (result.isLoading) {
+          return const Text('Loading');
+        }
+
+        List? products = result.data?['categories']?['data'];
+
+        return ProductSlider(title: 'Explore Product', data: products);
+      },
+    );
   }
 }
