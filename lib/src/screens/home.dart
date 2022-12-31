@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:ezb/src/widgets/core/app-bar.dart';
 import 'package:ezb/src/widgets/core/sidebar.dart';
-import 'package:ezb/src/widgets/core/text-float-image.dart';
 
 import 'package:ezb/src/widgets/home/carousel.dart';
 import 'package:ezb/src/widgets/home/product-carousel.dart';
 import 'package:ezb/src/widgets/home/categories-with-product.dart';
+import 'package:ezb/src/widgets/home/ads.dart';
+import './notifications.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -19,13 +20,7 @@ class HomeTab extends StatelessWidget {
         SizedBox(height: 16),
         ItemSlider(),
         SizedBox(height: 12),
-        TextFloatImageWidget(
-          image:
-              'https://cwsmgmt.corsair.com/pdp/cooling/elite-lcd/assets/images/scarif-wide-compatibility-bg.jpg',
-          title: 'ELITE LCD UPGRADE KIT',
-          subtitle:
-              'Transforms your CORSAIR ELITE CAPELLIX CPU cooler into a personalized dashboard.',
-        ),
+        HomeAds(),
         SizedBox(height: 32),
         CategoriesWithProduct(),
       ],
@@ -39,15 +34,6 @@ class SecondTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text('Second Tab');
-  }
-}
-
-class ThirdTab extends StatelessWidget {
-  const ThirdTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('Third Tab');
   }
 }
 
@@ -72,7 +58,7 @@ class HomeScreenState extends State<HomeScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeTab(),
     SecondTab(),
-    ThirdTab(),
+    NotificationWidget(),
     FourthTab(),
   ];
 
