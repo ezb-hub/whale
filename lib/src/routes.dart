@@ -13,7 +13,7 @@ class Routes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HttpLink httpLink = HttpLink(
-      'http://192.168.150.103:1337/graphql',
+      'http://192.168.150.107:1337/graphql',
     );
 
     ValueNotifier<GraphQLClient> client =
